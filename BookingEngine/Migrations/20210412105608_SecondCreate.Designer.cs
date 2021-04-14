@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingEngine.Migrations
 {
     [DbContext(typeof(BookingEngineContext))]
-    [Migration("20210318064858_RoomsCreate")]
-    partial class RoomsCreate
+    [Migration("20210412105608_SecondCreate")]
+    partial class SecondCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -94,11 +94,11 @@ namespace BookingEngine.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<byte[]>("ByteArrayImage")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Images")
-                        .HasColumnType("tinyint");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

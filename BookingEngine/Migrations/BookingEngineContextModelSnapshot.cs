@@ -85,18 +85,18 @@ namespace BookingEngine.Migrations
                     b.ToTable("Reservation");
                 });
 
-            modelBuilder.Entity("BookingEngine.Models.Room", b =>
+            modelBuilder.Entity("BookingEngine.Models.Rooms", b =>
                 {
                     b.Property<int>("RoomId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<byte[]>("ByteArrayImage")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Images")
-                        .HasColumnType("tinyint");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

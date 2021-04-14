@@ -35,7 +35,7 @@ namespace BookingEngine.Pages.Reservations
                 return Page();
             }
 
-            _context.guests.Add(Guest);
+            _context.Guest.Add(Guest);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Thanks");

@@ -38,7 +38,7 @@ namespace BookingEngine.Pages.Reservations
             _context.Reservation.Add(Reservation);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Rooms");
+            return RedirectToPage("./RoomList");
         }
     }
 }

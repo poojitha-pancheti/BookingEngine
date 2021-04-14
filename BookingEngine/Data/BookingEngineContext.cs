@@ -9,12 +9,13 @@ namespace BookingEngine.Data
 {
     public class BookingEngineContext : DbContext
     {
-        public BookingEngineContext (DbContextOptions<BookingEngineContext> options)
-            : base(options)
+        public BookingEngineContext(DbContextOptions<BookingEngineContext> options)
+             : base(options)
         {
-        }         
-        public DbSet<Reservation> Reservation { get; set; }
-        public DbSet<Room> rooms { get; set; }
-        public DbSet<Guest> guests { get; set; }
+        }
+
+        public DbSet<BookingEngine.Models.Reservation> Reservation { get; set; }
+        public DbSet<BookingEngine.Models.Rooms> Rooms { get; set; }
+        public DbSet<BookingEngine.Models.Guest> Guest { get; set; }
     }
 }

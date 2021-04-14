@@ -1,60 +1,19 @@
 ﻿@page
 @model BookingEngine.Pages.Reservations.RoomListModel
+@{ ViewData["Title"] = "RoomList"; }
+<h1>List of Rooms</h1>
 
-@{
-    ViewData["Title"] = "RoomList";
+
+
+@foreach (var room in Model.Rooms)
+{
+<div class="col-4">
+    <img src="@room.Base64Image" width="300" height="300" />
+    <h5 class="text-info"> Description </h5>
+    <h6>
+        @room.Description
+    </h6>
+
+    <a href="@Url.Page("RoomDetails", new {@roomId = room.RoomID})">View More Info</a>
+</div>
 }
-
-<h1>RoomList</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Rooms[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rooms[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rooms[0].Taxes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rooms[0].TotalPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rooms[0].ByteArrayImage)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Rooms) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Taxes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ByteArrayImage)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.RoomID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RoomID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RoomID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

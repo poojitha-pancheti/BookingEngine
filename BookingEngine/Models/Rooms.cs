@@ -19,5 +19,6 @@ namespace BookingEngine.Models
         [NotMapped]
         public string Base64Image { get; set; }
         public byte[] ByteArrayImage { get; set; }
+        public virtual ICollection<Reservation> Reservation { get; set; }
     }
 }

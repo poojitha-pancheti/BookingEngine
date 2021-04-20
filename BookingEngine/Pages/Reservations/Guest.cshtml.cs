@@ -14,20 +14,40 @@ namespace BookingEngine.Pages.Reservations
     {
         private readonly BookingEngine.Data.BookingEngineContext _context;
 
+        [BindProperty]
+        public int RoomId { get; set; }
+
+        [BindProperty]
+        public Guest Guest { get; set; }
+
+        [BindProperty]
+        public DateTime Checkin { get; set; }
+
+        [BindProperty]
+        public DateTime Checkout { get; set; }
+
+        [BindProperty]
+        public int NumberOfAdults { get; set; }
+
         public GuestModel(BookingEngine.Data.BookingEngineContext context)
         {
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int roomId, DateTime checkin, DateTime checkout, int numberOfAdults)
         {
+            this.RoomId = roomId;
+
+            this.Checkin = checkin;
+            this.Checkout = checkout;
+            this.NumberOfAdults = numberOfAdults;
+
             return Page();
         }
 
-        [BindProperty]
-        public Guest Guest { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,10 +55,36 @@ namespace BookingEngine.Pages.Reservations
                 return Page();
             }
 
+
+
             _context.Guest.Add(Guest);
+
+
+
+            Reservation reservation = new Reservation
+            {
+                CheckIn = this.Checkin,
+                CheckOut = this.Checkout,
+                Guest = Guest,
+                RoomId = this.RoomId,
+                NumberOfAdults = this.NumberOfAdults
+            };
+            _context.Reservation.Add(reservation);
+
+
+
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Thanks");
+
+
+            int guestId = Guest.GuestId;
+
+
+
+            return RedirectToPage("./ThankYou", new { reservationId = reservation.ID });
+
+
+
         }
     }
 }

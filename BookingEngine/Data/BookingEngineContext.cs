@@ -17,5 +17,17 @@ namespace BookingEngine.Data
         public DbSet<BookingEngine.Models.Reservation> Reservation { get; set; }
         public DbSet<BookingEngine.Models.Rooms> Rooms { get; set; }
         public DbSet<BookingEngine.Models.Guest> Guest { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Rooms>()
+                .HasMany(r => r.Reservation)
+                .WithOne(x => x.Room)
+                .HasForeignKey(x => x.RoomId);
+            modelBuilder.Entity<Guest>()
+                .HasMany(r => r.Reservation)
+                .WithOne(x => x.Guest)
+                .HasForeignKey(x => x.GuestId);
+        }
     }
 }

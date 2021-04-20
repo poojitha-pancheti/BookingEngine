@@ -19,11 +19,29 @@ namespace BookingEngine.Pages.Reservations
             _context = context;
         }
 
-        public IList<Rooms> Rooms { get;set; }
+        public IList<Rooms> Rooms { get; set; }
 
-        public async Task OnGetAsync()
+        [BindProperty]
+        public DateTime CheckIn { get; set; }
+        [BindProperty]
+        public DateTime CheckOut { get; set; }
+        [BindProperty]
+        public int NumberOfAdults { get; set; }
+
+        public async Task OnGetAsync(DateTime checkIn, DateTime checkOut, int numberOfAdults)
         {
-            var rooms = await _context.Rooms.ToListAsync();
+            this.CheckIn = checkIn;
+            this.CheckOut = checkOut;
+            this.NumberOfAdults = numberOfAdults;
+
+            var bookedRoomIds = await _context.Reservation
+                .Where(r => CheckIn <= r.CheckIn && r.CheckOut <= CheckOut)
+                .Select(x => x.RoomId)
+                .ToListAsync();
+
+            var rooms = await _context.Rooms
+                .Where(r=>bookedRoomIds.Contains(r.RoomID)==false)
+                .ToListAsync();
             foreach (var room in rooms)
             {
                 room.Base64Image = $"data:image/png;base64,{Convert.ToBase64String(room.ByteArrayImage)}";

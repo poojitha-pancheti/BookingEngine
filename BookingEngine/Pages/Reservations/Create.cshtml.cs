@@ -21,13 +21,16 @@ namespace BookingEngine.Pages.Reservations
 
         public IActionResult OnGet()
         {
+            TodaysDate = DateTime.Today.ToString("yyyyy-MM-dd");
             return Page();
         }
 
         [BindProperty]
         public Reservation Reservation { get; set; }
 
-        
+        [BindProperty]
+        public string TodaysDate { get; set; }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,10 +38,14 @@ namespace BookingEngine.Pages.Reservations
                 return Page();
             }
 
-            _context.Reservation.Add(Reservation);
-            await _context.SaveChangesAsync();
 
-            return RedirectToPage("./RoomList");
+
+            return RedirectToPage("./RoomList", new
+            {
+                CheckIn = Reservation.CheckIn,
+                CheckOut = Reservation.CheckOut,
+                NumberOfAdults = Reservation.NumberOfAdults
+            });
         }
     }
 }

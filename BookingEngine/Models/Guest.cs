@@ -35,5 +35,6 @@ namespace BookingEngine.Models
         public DateTime ExpiryDate { get; set; }
 
         public int CVV { get; set; }
-        }
+        public virtual ICollection<Reservation> Reservation { get; set; }
+    }
 }

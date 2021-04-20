@@ -2,33 +2,53 @@
 @model BookingEngine.Pages.Reservations.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "CheckIn";
 }
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Reservation.CheckIn" class="control-label"></label>
-                <input asp-for="Reservation.CheckIn" class="form-control" />
-                <span asp-validation-for="Reservation.CheckIn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Reservation.CheckOut" class="control-label"></label>
-                <input asp-for="Reservation.CheckOut" class="form-control" />
-                <span asp-validation-for="Reservation.CheckOut" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Reservation.NumberOfAdults" class="control-label"></label>
-                <input asp-for="Reservation.NumberOfAdults" class="form-control" />
-                <span asp-validation-for="Reservation.NumberOfAdults" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<style>
+    body {
+        background-image: url('https://ir-prod-us-standard-pms-roomclass-images.s3.amazonaws.com/889%2F1574870177_5.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+  
+</style>
+<div class="container" >
+    <div class="row">
+        <div class="col-md-4">
+            @*<div style="background-image: url('C:\Images\Mansion.jpg');">*@
+            <form method="post" style="background-color:floralwhite">
+                <h6 class="text-center" style="color:cornflowerblue;">Welcome! Please select your dates below</h6>
+                <hr />
+
+
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group" style="color:black">
+                    <label asp-for="Reservation.CheckIn" class="control-label"></label>
+                    <input asp-for="Reservation.CheckIn" min="@Model.TodaysDate"  class="form-control" />
+                    <span asp-validation-for="Reservation.CheckIn" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="color:black">
+                    <label asp-for="Reservation.CheckOut" class="control-label"></label>
+                    <input asp-for="Reservation.CheckOut" min="@Model.TodaysDate" class="form-control" />
+                    <span asp-validation-for="Reservation.CheckOut" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="color:black">
+                    <label asp-for="Reservation.NumberOfAdults" class="control-label"></label>
+                    <input asp-for="Reservation.NumberOfAdults" class="form-control" />
+                    <span asp-validation-for="Reservation.NumberOfAdults" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="SearchForRooms" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

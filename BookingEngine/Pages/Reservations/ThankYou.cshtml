@@ -1,0 +1,10 @@
+﻿@page
+@model BookingEngine.Pages.Reservations.ThankYouModel
+@{
+    ViewData["Title"] = "Thank You";
+}
+<h1 class="text-center" style="color:cornflowerblue">Successfull ! Thank you for booking</h1>
+<h3 class="text-center" style="color:ThreeDDarkShadow">@Model.BookedByGuest.FirstName</h3>
+<h3 class="text-center" style="color:ThreeDDarkShadow">@Model.BookedRoom.Description</h3>
+
+<img  src="@Model.BookedRoom.Base64Image"  width="300" height="300"/>

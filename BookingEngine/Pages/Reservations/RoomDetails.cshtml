@@ -117,6 +117,16 @@
 
     <h5 style="color:deepskyblue">TotalPrice:@Model.Room.TotalPrice</h5>
     <div>
-        <a asp-page="Guest" class="btn btn-primary">Book Room</a>
+        @*<a asp-page="Guest" class="btn btn-primary">Book Room</a>*@
+        <a href="@Url.Page("Guest",new
+            {
+                @roomId=Model.Room.RoomID,
+                @checkIn=Model.CheckIn,
+                @checkout=Model.CheckOut,
+                @numberofAdults=Model.NumberOfAdults
+            })"
+           class="btn btn-primary">
+            Book Room
+        </a>
     </div>
 </div>

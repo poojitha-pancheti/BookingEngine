@@ -31,13 +31,13 @@ namespace BookingEngine.Pages.Reservations
             var reservation = _ctx.Reservation.Include(res => res.Room)
                 .Include(res => res.Guest)
                 .FirstOrDefault(r => r.ID == reservationId);
-            if (reservation == null)
-            {
-                return;
-            }
-            BookedRoom = reservation.Room;
-            BookedByGuest = reservation.Guest;
-            BookedRoom.Base64Image = $"data:image/png;base64,{Convert.ToBase64String(BookedRoom.ByteArrayImage)}";
+            //if (reservation == null)
+            //{
+            //    return;
+            //}
+            //BookedRoom = reservation.Room;
+            //BookedByGuest = reservation.Guest;
+            //BookedRoom.Base64Image = $"data:image/png;base64,{Convert.ToBase64String(BookedRoom.ByteArrayImage)}";
         }
     }
 }

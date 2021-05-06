@@ -17,6 +17,7 @@ namespace BookingEngine.Data
         public DbSet<BookingEngine.Models.Reservation> Reservation { get; set; }
         public DbSet<BookingEngine.Models.Rooms> Rooms { get; set; }
         public DbSet<BookingEngine.Models.Guest> Guest { get; set; }
+     
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
